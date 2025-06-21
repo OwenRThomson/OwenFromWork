@@ -5,5 +5,5 @@ export const SITE_TITLE = "OwenFromWork";
 export const SITE_DESCRIPTION =
   "A blog about software engineering and frontend development for data analytics products.";
 export const COLOUR_THEME = "concord";
-export const THEME = "dark"; // or "dark"
-export const YOUR_NAME = "owen"; // Your name or the name of the site owner
+export const THEME = "light"; // or "dark"
+export const YOUR_NAME = "Owen"; // Your name or the name of the site owner

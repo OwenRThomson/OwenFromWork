@@ -32,7 +32,7 @@ import Heading from "../components/Heading.astro";
       <Heading>
         <p
           slot="caption"
-          class="mt-2 text-base sm:text-lg/8 dark:text-surface-200 text-surface-600"
+          class="mt-2 text-base sm:text-lg dark:text-surface-200 text-surface-600"
         >
           I'm a full stack software engineer working on data-heavy applications.
           Polybox is my current focus, where I help build a platform for
@@ -45,18 +45,18 @@ import Heading from "../components/Heading.astro";
 
       <div class="grid grid-cols-1 w-full space-y-8">
         <div class="flex flex-row justify-between">
-          <h3 class="h3">Projects</h3>
-
-          <button class="underline text-secondary-500">View all</button>
+          <h3 class="h3 text-4xl">Projects</h3>
         </div>
-        <ProjectsList projects={projects} />
+        <ProjectsList
+          repoUrls={["https://github.com/OwenRThomson/OwenFromWork"]}
+        />
       </div>
 
       <div class="grid grid-cols-1 w-full space-y-8">
         <div class="flex flex-row justify-between">
-          <h3 class="h3">Blog</h3>
+          <h3 class="h3 text-4xl">Blog</h3>
 
-          <button class="underline text-secondary-500">View all</button>
+          <a href="/blog" class="underline text-secondary-500">View all</a>
         </div>
         <PostsList posts={posts} />
       </div>

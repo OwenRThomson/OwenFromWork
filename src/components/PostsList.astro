@@ -1,23 +1,40 @@
 ---
 import { Image } from "astro:assets";
-
 import type { CollectionEntry } from "astro:content";
-
-type BlogPost = CollectionEntry<"blogPosts">;
-
 const { posts } = Astro.props;
+
+// List of color classes to cycle through
+const tagColors = [
+  "preset-filled-secondary-100-900",
+  "preset-filled-primary-100-900",
+  "preset-filled-success-100-900",
+  "preset-filled-warning-100-900",
+  "preset-filled-error-100-900",
+  "preset-filled-surface-200-800",
+  // Add more if needed
+];
+
+// Get all unique tags from posts, sorted for consistency
+const allTags = Array.from(
+  new Set(posts.flatMap((post: any) => post.data.tags || []))
+).sort((a, b) => (a as string).localeCompare(b as string));
+
+function getTagColor(tag: string) {
+  const idx = allTags.indexOf(tag);
+  return tagColors[idx % tagColors.length];
+}
 ---
 
 {
   (posts as any[]).length === 0 ? (
-    <p class="text-center text-gray-500">No posts found.</p>
+    <p class="text-center text-gray-500 px-4">No posts found.</p>
   ) : (
-    <ul class="mx-auto grid grid-cols-1 w-full gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+    <ul class="mx-auto grid grid-cols-1 w-full gap-4  sm:gap-6 lg:max-w-none lg:grid-cols-2 lg:gap-x-8 lg:gap-y-16">
       {(posts as any[]).map((post) => (
         <li>
           <a
             href={`/blog/${post.id}/`}
-            class="card preset-filled-surface-100 border-[1px] border-surface-200-800 card-hover divide-surface-200-800 block  divide-y overflow-hidden"
+            class="card preset-filled-surface-100 border-[1px] border-surface-200-800 card-hover divide-surface-200-800 block divide-y overflow-hidden transition-transform hover:scale-105"
           >
             {/* Header */}
             <header>
@@ -26,25 +43,35 @@ const { posts } = Astro.props;
                   src={post.data.heroImage}
                   alt="banner"
                   fit="cover"
-                  class="w-full grayscale hue-rotate-90"
+                  class="w-full aspect-video object-cover grayscale hue-rotate-90 sm:aspect-[4/3]"
                 />
               )}
             </header>
             {/* Article */}
-            <article class="space-y-4 p-4">
+            <article class="space-y-3 p-3 sm:space-y-4 sm:p-4">
               <div class="space-y-2">
-                <h2 class="h7 badge badge-sm preset-filled-primary-100-900">
-                  Announcements
-                </h2>
-                <h3 class="h4">{post.data.title}</h3>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {post.data.tags.map((tag: string) => (
+                      <span
+                        class={`h7 badge badge-sm text-lg lg:text-sm ${getTagColor(tag)}`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <h3 class="h4 text-3xl sm:text-3xl md:text-2xl lg:text-xl leading-tight">
+                  {post.data.title}
+                </h3>
               </div>
-              <p class="opacity-60 text-sm">
+              <p class="opacity-60 text-lg lg:text-sm   line-clamp-3">
                 {post.data.description || post.data.title}
               </p>
             </article>
             {/* Footer */}
-            <footer class="flex bg-surface-100 dark:bg-surface-800 items-center justify-between gap-4 p-4">
-              <small class="opacity-60">
+            <footer class="flex bg-surface-100 dark:bg-surface-800 items-center justify-between gap-2 p-3 sm:gap-4 sm:p-4">
+              <small class="opacity-60 text-xl md:text-lg lg:text-sm">
                 On {post.data.pubDate.toDateString()}
               </small>
             </footer>

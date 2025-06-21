@@ -58,8 +58,8 @@ const repoDetailsList = await Promise.all(repoUrls.map(fetchRepoDetails));
                 </span>
               </header>
               {/* Article */}
-              <article class="space-y-3 p-3 sm:space-y-4 sm:p-4">
-                <p class="opacity-80 text-xl sm:text-2xl lg:text-base line-clamp-3">
+              <article class="space-y-3 p-8 lg:space-y-4 lg:p-4">
+                <p class="opacity-80 text-2xl sm:text-2xl lg:text-base line-clamp-3">
                   {repo.description || repo.full_name}
                 </p>
                 {repo.language && (

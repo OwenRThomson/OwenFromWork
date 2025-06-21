@@ -1,0 +1,106 @@
+---
+// BlogPostHead.astro
+// SEO head for blog posts
+import { SEO } from "astro-seo";
+import { SITE_TITLE } from "../consts";
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date | string;
+  updatedDate?: Date | string;
+  heroImage?: string;
+  canonicalUrl?: string;
+  author?: string;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  canonicalUrl,
+  author,
+  tags,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() ?? "";
+const canonicalURL = canonicalUrl
+  ? new URL(canonicalUrl, siteUrl)
+  : (Astro.url ?? "");
+const imageUrl = heroImage
+  ? heroImage.startsWith("http")
+    ? heroImage
+    : new URL(heroImage, siteUrl).toString()
+  : "";
+const published = typeof pubDate === "string" ? pubDate : pubDate.toISOString();
+const modified = updatedDate
+  ? typeof updatedDate === "string"
+    ? updatedDate
+    : updatedDate.toISOString()
+  : undefined;
+---
+
+<script is:inline>
+  (function () {
+    try {
+      const mode = localStorage.getItem("mode") || "light";
+      const theme = localStorage.getItem("color-theme") || "concord";
+      document.documentElement.setAttribute("data-mode", mode);
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(mode);
+    } catch (e) {
+      document.documentElement.setAttribute("data-mode", "light");
+      document.documentElement.setAttribute("data-theme", "concord");
+      document.documentElement.classList.add("light");
+    }
+  })();
+</script>
+
+<SEO
+  title={title}
+  description={description}
+  canonical={canonicalURL.toString()}
+  openGraph={{
+    basic: {
+      title,
+      type: "article",
+      image: imageUrl,
+      url: canonicalURL.toString(),
+    },
+    article: {
+      publishedTime: published,
+      modifiedTime: modified,
+      authors: author ? [author] : undefined,
+      tags: tags,
+    },
+    optional: {
+      description,
+      siteName: SITE_TITLE,
+    },
+  }}
+  twitter={{
+    card: heroImage ? "summary_large_image" : "summary",
+    title,
+    description,
+    image: imageUrl,
+  }}
+  extend={{
+    link: [
+      { rel: "icon", href: "/favicon.jpg" },
+      { rel: "sitemap", href: "/sitemap-index.xml" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: SITE_TITLE,
+        href: new URL("rss.xml", siteUrl).toString(),
+      },
+      { rel: "canonical", href: canonicalURL.toString() },
+    ],
+    meta: [{ name: "generator", content: Astro.generator }],
+  }}
+/>

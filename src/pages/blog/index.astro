@@ -1,0 +1,45 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import { COLOUR_THEME, THEME } from "../../consts";
+import PostsList from "../../components/PostsList.astro";
+import Heading from "../../components/Heading.astro";
+
+const posts = (await getCollection("blogPosts")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en" data-theme={COLOUR_THEME} data-mode={THEME}>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <Header />
+    <main
+      class="flex flex-col items-center justify-center space-y-16 sm:space-y-24 md:space-y-32 py-12 sm:py-20 md:py-32 mx-auto w-full max-w-3xl sm:max-w-4xl md:max-w-5xl px-4 sm:px-6 md:px-8"
+    >
+      <Heading>
+        <p
+          slot="caption"
+          class="mt-2 text-base sm:text-lg/8 dark:text-surface-200 text-surface-600"
+        >
+          I write about Software Development in small teams, Full Stack
+          Development for data heavy applications, or just whatever is
+          interesting me at the time.
+        </p>
+      </Heading>
+
+      <div class="grid grid-cols-1 gap-8">
+        <PostsList posts={posts} />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

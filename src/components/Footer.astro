@@ -1,0 +1,14 @@
+---
+import SocialLinks from "./SocialLinks.astro";
+import { SITE_TITLE } from "../consts";
+
+const today = new Date();
+---
+
+<footer class="py-8 px-4 pb-24 bg-gradient-to-b text-center">
+  &copy; {today.getFullYear()}
+  {SITE_TITLE}. All rights reserved.
+  <div class="flex justify-center gap-4 mt-4">
+    <SocialLinks />
+  </div>
+</footer>

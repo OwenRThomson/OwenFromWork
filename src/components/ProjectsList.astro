@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type ProjectEntry = CollectionEntry<"projects">;
+
+const { projects } = Astro.props as { projects: ProjectEntry[] };
+---
+
+{
+  projects.length === 0 ? (
+    <p class="text-center text-gray-500">No projects found.</p>
+  ) : (
+    <ul class="w-full grid grid-cols-2 gap-x-4 gap-y-4">
+      {projects.map((project: ProjectEntry) => (
+        <li>
+          <a
+            href={`/blog/${project.id}/`}
+            class="card preset-filled-surface-100 w-full border-[1px] border-surface-200-800 card-hover divide-surface-200-800 block divide-y overflow-hidden"
+          >
+            <article class="space-y-4 p-4">
+              <div class="space-y-2">
+                <h2 class="h7 badge badge-sm preset-filled-primary-100-900">
+                  Announcements
+                </h2>
+                <h3 class="h4">{project.data.title}</h3>
+              </div>
+              <p class="opacity-60 text-sm">
+                {project.data.description || project.data.title}
+              </p>
+            </article>
+            {/* Footer */}
+            <footer class="flex items-center bg-surface-100 dark:bg-surface-800 justify-between gap-4 p-4">
+              <small class="opacity-60">
+                On {project.data.pubDate.toDateString()}
+              </small>
+            </footer>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

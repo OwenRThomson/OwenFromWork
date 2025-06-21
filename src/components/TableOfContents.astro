@@ -1,0 +1,55 @@
+---
+export interface Heading {
+  slug: string;
+  text: string;
+  depth: number;
+}
+
+function setIndentationClass(depth: number) {
+  switch (depth) {
+    case 6:
+      return "pl-12";
+    case 5:
+      return "pl-10";
+    case 4:
+      return "pl-8";
+    case 3:
+      return "pl-6";
+    case 2:
+      return "pl-4";
+    case 1:
+      return "pl-2";
+    default:
+      return "pl-0";
+  }
+}
+
+export interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<nav class="card bg-surface-50 dark:bg-surface-800 p-4 mb-8">
+  <div class="text-sm space-y-2">
+    <div class="font-bold text-surface-900 dark:text-surface-50">
+      On This Page
+    </div>
+    <ul class="space-y-2">
+      <li><a href="#_top" class="anchor block">Overview</a></li>
+      {
+        headings.map((heading) => (
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              class={`anchor block ${setIndentationClass(heading.depth)}`}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

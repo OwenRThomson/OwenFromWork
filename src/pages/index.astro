@@ -1,0 +1,66 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import { COLOUR_THEME, THEME } from "../consts";
+import PostsList from "../components/PostsList.astro";
+import ProjectsList from "../components/ProjectsList.astro";
+
+const posts = (await getCollection("blogPosts"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+import Heading from "../components/Heading.astro";
+---
+
+<!doctype html>
+<html lang="en" data-theme={COLOUR_THEME} data-mode={THEME}>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main
+      class="flex flex-col items-center justify-center space-y-16 sm:space-y-24 md:space-y-32 py-12 sm:py-20 md:py-32 mx-auto w-full max-w-3xl sm:max-w-4xl md:max-w-5xl px-4 sm:px-6 md:px-8"
+    >
+      <Heading>
+        <p
+          slot="caption"
+          class="mt-2 text-base sm:text-lg/8 dark:text-surface-200 text-surface-600"
+        >
+          I'm a full stack software engineer working on data-heavy applications.
+          Polybox is my current focus, where I help build a platform for
+          marketing data reporting. We use things like React, Tailwind,
+          Supabase/Postgres, Cube.Js, Fivetran and more - so I'll mostly be
+          talking about those. I also built this blog template, which you can
+          use yourself if you'd like!
+        </p>
+      </Heading>
+
+      <div class="grid grid-cols-1 w-full space-y-8">
+        <div class="flex flex-row justify-between">
+          <h3 class="h3">Projects</h3>
+
+          <button class="underline text-secondary-500">View all</button>
+        </div>
+        <ProjectsList projects={projects} />
+      </div>
+
+      <div class="grid grid-cols-1 w-full space-y-8">
+        <div class="flex flex-row justify-between">
+          <h3 class="h3">Blog</h3>
+
+          <button class="underline text-secondary-500">View all</button>
+        </div>
+        <PostsList posts={posts} />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

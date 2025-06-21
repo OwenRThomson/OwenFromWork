@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+
+import type { CollectionEntry } from "astro:content";
+
+type BlogPost = CollectionEntry<"blogPosts">;
+
+const { posts } = Astro.props;
+---
+
+{
+  (posts as any[]).length === 0 ? (
+    <p class="text-center text-gray-500">No posts found.</p>
+  ) : (
+    <ul class="mx-auto grid grid-cols-1 w-full gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+      {(posts as any[]).map((post) => (
+        <li>
+          <a
+            href={`/blog/${post.id}/`}
+            class="card preset-filled-surface-100 border-[1px] border-surface-200-800 card-hover divide-surface-200-800 block  divide-y overflow-hidden"
+          >
+            {/* Header */}
+            <header>
+              {post.data.heroImage && (
+                <Image
+                  src={post.data.heroImage}
+                  alt="banner"
+                  fit="cover"
+                  class="w-full grayscale hue-rotate-90"
+                />
+              )}
+            </header>
+            {/* Article */}
+            <article class="space-y-4 p-4">
+              <div class="space-y-2">
+                <h2 class="h7 badge badge-sm preset-filled-primary-100-900">
+                  Announcements
+                </h2>
+                <h3 class="h4">{post.data.title}</h3>
+              </div>
+              <p class="opacity-60 text-sm">
+                {post.data.description || post.data.title}
+              </p>
+            </article>
+            {/* Footer */}
+            <footer class="flex bg-surface-100 dark:bg-surface-800 items-center justify-between gap-4 p-4">
+              <small class="opacity-60">
+                On {post.data.pubDate.toDateString()}
+              </small>
+            </footer>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

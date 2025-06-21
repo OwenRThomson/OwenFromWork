@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import { Image } from "astro:assets";
+import BlogPostHead from "../components/BlogPostHead.astro";
+import { COLOUR_THEME, THEME } from "../consts";
+
+type Props = CollectionEntry<"blogPosts">["data"];
+
+const { title, tags, description, pubDate, updatedDate, heroImage } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme={COLOUR_THEME} data-mode={THEME}>
+  <head>
+    <BlogPostHead
+      title={title}
+      description={description}
+      pubDate={pubDate}
+      updatedDate={updatedDate}
+      heroImage={heroImage?.src}
+      canonicalUrl={Astro.url.toString()}
+      author="Sergio Xalambrí"
+      tags={tags}
+    />
+  </head><body>
+    <Header />
+    <main class="flex w-full">
+      <article class="mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="hero-image">
+          {
+            heroImage && (
+              <Image width={1020} height={510} src={heroImage} alt="" />
+            )
+          }
+        </div>
+        <div class="prose w-full">
+          <div class="text-surface-100 dark:text-surface-800">
+            <div class="dark:text-surface-300 text-surface-400">
+              <FormattedDate date={pubDate} />
+              {
+                updatedDate && (
+                  <div class="italics">
+                    Last updated on <FormattedDate date={updatedDate} />
+                  </div>
+                )
+              }
+            </div>
+            <h1 class="h1 dark:text-surface-50 text-surface-950">
+              {title}
+            </h1>
+            <hr />
+          </div>
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

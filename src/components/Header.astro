@@ -15,32 +15,27 @@ import { SITE_TITLE } from "../consts";
       <a href="/" class="font-semibold text-lg">{SITE_TITLE}</a>
     </h2>
 
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex social-links items-center gap-4">
-      <div class="flex items-center gap-4">
-        <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="/blog">Blog</HeaderLink>
-        <HeaderLink href="/about">About</HeaderLink>
+    <div class="flex items-right gap-4">
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex social-links items-center gap-4">
+        <ThemeSwitcher client:load />
+        <SocialLinks />
       </div>
-      <ThemeSwitcher client:load />
-      <SocialLinks />
-    </div>
 
-    <!-- Mobile Navigation -->
-    <div class="md:hidden">
-      <BurgerMenu client:load>
-        <div class="flex flex-col gap-6 p-6">
-          <div class="flex flex-col gap-4">
-            <HeaderLink href="/">Home</HeaderLink>
-            <HeaderLink href="/blog">Blog</HeaderLink>
-            <HeaderLink href="/about">About</HeaderLink>
+      <!-- Mobile Navigation -->
+      <div class="lg:hidden">
+        <BurgerMenu client:load>
+          <div class="flex flex-col gap-6 p-6">
+            <div class="flex items-center justify-between">
+              <ThemeSwitcher client:load />
+              <SocialLinks />
+            </div>
           </div>
-          <div class="flex items-center justify-between">
-            <ThemeSwitcher client:load />
-            <SocialLinks />
-          </div>
-        </div>
-      </BurgerMenu>
+        </BurgerMenu>
+      </div>
     </div>
   </nav>
 </header>

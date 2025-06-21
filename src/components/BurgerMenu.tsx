@@ -50,7 +50,7 @@ export default function BurgerMenu({ children }: BurgerMenuProps) {
     <div className="relative" ref={menuRef}>
       {/* Burger Button */}
       <button
-        className="flex flex-col justify-center items-center w-8 h-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md transition-all duration-200 z-50 relative"
+        className="flex md:btn-lg flex-col justify-center items-center w-12 h-12 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md transition-all duration-200 z-50 relative"
         onClick={toggleMenu}
         aria-label="Toggle navigation menu"
         aria-expanded={isOpen}
@@ -76,7 +76,7 @@ export default function BurgerMenu({ children }: BurgerMenuProps) {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-300"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden transition-opacity duration-300"
           onClick={closeMenu}
           role="button"
           tabIndex={0}
@@ -91,7 +91,7 @@ export default function BurgerMenu({ children }: BurgerMenuProps) {
 
       {/* Mobile Menu Panel */}
       <div
-        className={`fixed top-0 right-0 w-full h-full bg-surface-50 dark:bg-surface-900 shadow-xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 w-full h-full bg-surface-50 dark:bg-surface-900 shadow-xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"

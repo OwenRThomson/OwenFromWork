@@ -13,6 +13,7 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
   href={href}
   class:list={[
     "btn",
+    "md:btn-lg", // Make button larger on small screens
     isActive ? "preset-tonal " : "hover:preset-tonal-primary",
     className,
     { active: isActive },

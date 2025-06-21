@@ -1,10 +1,10 @@
 ---
-const { size = "w-20" } = Astro.props;
+const { class: className = "w-20" } = Astro.props;
 ---
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  class={`${size} text-surface-900 dark:bg-surface-50 border-0 dark:text-surface-950 bg-surface-0 rounded-base`}
+  class={`${className} text-surface-900 dark:bg-surface-50 border-0 dark:text-surface-950 bg-surface-0 rounded-base`}
   fill="currentColor"
   version="1.0"
   viewBox="0 -10 300 300"

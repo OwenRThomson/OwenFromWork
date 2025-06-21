@@ -54,24 +54,24 @@ function getTagColor(tag: string) {
                   <div class="flex flex-wrap gap-2">
                     {post.data.tags.map((tag: string) => (
                       <span
-                        class={`h7 badge badge-sm text-lg lg:text-sm ${getTagColor(tag)}`}
+                        class={`h7 badge badge-sm text-xl lg:text-base ${getTagColor(tag)}`}
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
-                <h3 class="h4 text-3xl sm:text-3xl md:text-2xl lg:text-xl leading-tight">
+                <h3 class="h4 text-5xl lg:text-xl leading-tight">
                   {post.data.title}
                 </h3>
               </div>
-              <p class="opacity-60 text-lg lg:text-sm   line-clamp-3">
+              <p class="opacity-60 text-3xl lg:text-sm   line-clamp-3">
                 {post.data.description || post.data.title}
               </p>
             </article>
             {/* Footer */}
             <footer class="flex bg-surface-100 dark:bg-surface-800 items-center justify-between gap-2 p-3 sm:gap-4 sm:p-4">
-              <small class="opacity-60 text-xl md:text-lg lg:text-sm">
+              <small class="opacity-60 text-2xl lg:text-base">
                 On {post.data.pubDate.toDateString()}
               </small>
             </footer>

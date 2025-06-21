@@ -31,8 +31,10 @@ export interface Props {
 const { headings } = Astro.props;
 ---
 
-<nav class="card bg-surface-50 dark:bg-surface-800 p-4 mb-8">
-  <div class="text-sm space-y-2">
+<nav
+  class="card bg-surface-50 dark:bg-surface-800 p-4 mb-8 lg:text-lg text-2xl"
+>
+  <div class="space-y-2">
     <div class="font-bold text-surface-900 dark:text-surface-50">
       On This Page
     </div>
@@ -43,7 +45,7 @@ const { headings } = Astro.props;
           <li>
             <a
               href={`#${heading.slug}`}
-              class={`anchor block ${setIndentationClass(heading.depth)}`}
+              class={`anchor  block ${setIndentationClass(heading.depth)}`}
             >
               {heading.text}
             </a>

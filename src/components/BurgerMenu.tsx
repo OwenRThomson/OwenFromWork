@@ -50,27 +50,15 @@ export default function BurgerMenu({ children }: BurgerMenuProps) {
     <div className="relative" ref={menuRef}>
       {/* Burger Button */}
       <button
-        className="flex md:btn-lg flex-col justify-center items-center w-12 h-12 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md transition-all duration-200 z-50 relative"
+        className="flex md:btn-lg flex-col justify-center items-center w-32 h-32 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md transition-all duration-200 z-50 relative"
         onClick={toggleMenu}
         aria-label="Toggle navigation menu"
         aria-expanded={isOpen}
         type="button"
       >
-        <span
-          className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out ${
-            isOpen ? "rotate-45 translate-y-1.5" : ""
-          }`}
-        />
-        <span
-          className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out mt-1 ${
-            isOpen ? "opacity-0" : ""
-          }`}
-        />
-        <span
-          className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out mt-1 ${
-            isOpen ? "-rotate-45 -translate-y-1.5" : ""
-          }`}
-        />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+	<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M4 7h3m13 0h-9m9 10h-3M4 17h9m-9-5h16" />
+</svg>
       </button>
 
       {/* Mobile Menu Overlay */}
@@ -99,29 +87,19 @@ export default function BurgerMenu({ children }: BurgerMenuProps) {
         aria-labelledby="menu-title"
       >
         {/* Header with close button */}
-        <div className="flex justify-between items-center p-4 border-b border-surface-200 dark:border-surface-700">
-          <h3 id="menu-title" className="font-semibold text-lg">
+        <div className="flex justify-between text-4xl items-center p-4 border-b border-surface-200 dark:border-surface-700">
+          <h3 id="menu-title" className="font-semibold text-5xl">
             Menu
           </h3>
           <button
-            className="p-2 rounded-md hover:bg-surface-100 dark:hover:bg-surface-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+        className="flex md:btn-lg flex-col justify-center items-center w-32 h-32 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md transition-all duration-200 z-50 relative"
             onClick={closeMenu}
             aria-label="Close menu"
             type="button"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z" />
+          </svg>
           </button>
         </div>
 

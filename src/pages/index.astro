@@ -12,10 +12,6 @@ const posts = (await getCollection("blogPosts"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const projects = (await getCollection("projects"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 2);
-
 import Heading from "../components/Heading.astro";
 ---
 
@@ -32,7 +28,7 @@ import Heading from "../components/Heading.astro";
       <Heading>
         <p
           slot="caption"
-          class="mt-2 text-base sm:text-lg dark:text-surface-200 text-surface-600"
+          class="mt-2 text-3xl dark:text-surface-200 text-surface-600 lg:text-lg"
         >
           I'm a full stack software engineer working on data-heavy applications.
           Polybox is my current focus, where I help build a platform for
@@ -45,7 +41,7 @@ import Heading from "../components/Heading.astro";
 
       <div class="grid grid-cols-1 w-full space-y-8">
         <div class="flex flex-row justify-between">
-          <h3 class="h3 text-4xl">Projects</h3>
+          <h3 class="h3 text-5xl lg:text-4xl">Projects</h3>
         </div>
         <ProjectsList
           repoUrls={["https://github.com/OwenRThomson/OwenFromWork"]}
@@ -54,7 +50,7 @@ import Heading from "../components/Heading.astro";
 
       <div class="grid grid-cols-1 w-full space-y-8">
         <div class="flex flex-row justify-between">
-          <h3 class="h3 text-4xl">Blog</h3>
+          <h3 class="h3 text-5xl lg:text-4xl">Blog</h3>
 
           <a href="/blog" class="underline text-secondary-500">View all</a>
         </div>

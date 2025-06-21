@@ -53,7 +53,7 @@
 <div
   class="w-72 sm:w-96 md:w-[32rem] lg:w-40 flex flex-row space-x-4 p-4 sm:p-6 md:p-8 lg:p-0 text-xl sm:text-2xl md:text-3xl lg:text-base"
 >
-  <div class="scale-150 lg:scale-100">
+  <div class="scale-250 lg:scale-100 mt-4 lg:mt-0">
     <Switch
       name={mounted ? "mode" : "compact"}
       controlInactive={mounted ? "bg-surface-50" : undefined}
@@ -96,7 +96,7 @@
     <label for="theme-select" class="sr-only">Theme:</label>
     <select
       id="theme-select"
-      class="w-full sm:w-60 md:w-80 lg:w-fit text-xl sm:text-2xl md:text-3xl lg:text-base"
+      class="w-full sm:w-60 md:w-80 lg:w-fit text-5xl lg:text-base"
       bind:value={selectedTheme[0]}
       on:change={onThemeChange}
       aria-label="Select Theme"

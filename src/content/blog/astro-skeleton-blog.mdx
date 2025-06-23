@@ -3,8 +3,45 @@ title: "Creating a Flexible Astro Site with Skeleton UI"
 description: "Learn how to build lightning-fast websites with Astro, the modern static site generator that ships zero JavaScript by default."
 pubDate: 2025-06-21
 updatedDate: 2025-06-21
+heroImage: "../../assets/astro-skeleton.png"
 tags: ["Astro", "Skeleton UI", "Web Development", "Frontend"]
 ---
 
+import RepoCard from '../../components/RepoCard.jsx'
 
-Hello, world! In this post, we'll explore how to create a flexible and fast website using Astro and Skeleton UI.
+> I'm super indecisive about how my site looks.  
+> It's too light, it's too dark, it's too blue, it's too pink.  
+
+I always change my mind.
+
+And that's not even mentioning the **framework**.  
+I'm learning **React**, but I'm more familiar with **Svelte**. Do I want speed, or do I want to keep learning?
+
+So the idea for this project was simple:  
+**Build a site I know I'll want to change later — and make sure I have no excuse to start over.**
+
+<RepoCard client:only="react" repoUrl="https://github.com/OwenRThomson/OwenFromWork" />
+
+
+## 🛠️ Tools Used
+
+- [**Astro**](https://astro.build/) is a static site generator that ships **zero JavaScript by default** — so it's blazing fast. The best part? You can use **any frontend framework** you like.
+
+- [**Skeleton UI**](https://www.skeleton.dev/) is a design framework I’ve used before — and now it works great with **Svelte**, **React**, and **Astro**.  
+
+Skeleton’s real superpower? **Themes**.  
+You can define a single theme file, and it propagates styling across your entire site. Want to see it in action? Try switching the **theme** or **dark/light mode** from the site menu.
+
+There are a few built-in examples in this blog (see the navbar), but you can design your own theme and drop it right in. 💅
+
+
+## ✨ Features
+
+- **Framework Flexibility**  
+  Use **React**, **Svelte**, or **both**. You can use anything Astro supports (which is most frameworks).
+
+- **Super Customizable**  
+  Quickly apply themes and global styles to make your site truly yours.
+
+- **MDX Support**  
+  Write posts in Markdown, sprinkle in React components (like the `RepoCard` above), and mix content and interactivity seamlessly.

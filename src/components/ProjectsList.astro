@@ -1,88 +1,19 @@
 ---
-import { Image } from "astro:assets";
 const { repoUrls } = Astro.props as { repoUrls: string[] };
-import axios from "axios";
-
-// Fetch language colors once
-const languageColorsResponse = await axios.get(
-  "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
-);
-const languageColors = languageColorsResponse.data;
-
-// Helper to fetch repo details
-async function fetchRepoDetails(url: string) {
-  try {
-    const response = await fetch(
-      `https://api.github.com/repos${new URL(url).pathname}`
-    );
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data for repository: ${url}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
-
-// Fetch all repo details in parallel
-const repoDetailsList = await Promise.all(repoUrls.map(fetchRepoDetails));
+import RepoCard from "./RepoCard.jsx";
 ---
 
 {
-  repoDetailsList.length === 0 ? (
+  repoUrls.length === 0 ? (
     <p class="text-center text-gray-500 px-4 text-lg sm:text-xl lg:text-base">
       No repositories found.
     </p>
   ) : (
     <ul class="mx-auto grid grid-cols-1 w-full gap-4 sm:gap-6 lg:max-w-none lg:grid-cols-2 lg:gap-x-8 lg:gap-y-16">
-      {repoDetailsList.map((repo, idx) =>
-        repo ? (
-          <li>
-            <a
-              href={repo.html_url}
-              class="card preset-filled-surface-100 border-[1px] border-surface-200-800 card-hover divide-surface-200-800 block divide-y overflow-hidden transition-transform hover:scale-105"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {/* Header: show repo owner avatar */}
-              <header class="flex items-center gap-3 p-3">
-                <img
-                  src={repo.owner.avatar_url}
-                  alt={repo.owner.login}
-                  class="w-10 h-10 rounded-full"
-                />
-                <span class="font-bold text-xl sm:text-2xl lg:text-base">
-                  {repo.full_name}
-                </span>
-              </header>
-              {/* Article */}
-              <article class="space-y-3 p-8 lg:space-y-4 lg:p-4">
-                <p class="opacity-80 text-2xl sm:text-2xl lg:text-base line-clamp-3">
-                  {repo.description || repo.full_name}
-                </p>
-                {repo.language && (
-                  <div class="flex items-center gap-2 mt-2">
-                    <span
-                      style={{
-                        background:
-                          languageColors[repo.language]?.color || "#0366d6",
-                      }}
-                      class="lg:w-3 lg:h-3 w-5 h-5 rounded-full inline-block"
-                    />
-                    <span class="text-2xl  lg:text-sm">{repo.language}</span>
-                  </div>
-                )}
-              </article>
-              {/* Footer */}
-              <footer class="flex bg-surface-100 dark:bg-surface-800 items-center justify-between gap-2 p-3 sm:gap-4 sm:p-4">
-                <small class="opacity-60 text-lg sm:text-xl lg:text-sm">
-                  ★ {repo.stargazers_count} &nbsp;|&nbsp; Forks:{" "}
-                  {repo.forks_count}
-                </small>
-              </footer>
-            </a>
+      {repoUrls.map((url, idx) =>
+        url ? (
+          <li key={url}>
+            <RepoCard client:only="react" repoUrl={url} />
           </li>
         ) : null
       )}
